@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Revelation´s</title>
+    <link rel="stylesheet" href="styles.css">
+    <!-- Google Fonts para mejorar la tipografía -->
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Freehand521 BT', sans-serif;
+            margin: 0;
+            padding: 25px;
+            background-image: url('https://img.freepik.com/fotos-premium/botella-crema-coco-junto-frasco-crema_956920-257908.jpg?w=1060');
+            color: #F58B20;
+            display: flex;
+            flex-direction: column;
+        }
+
+        header {
+            background-color: #F56620;
+            color: black;
+            padding: 0.5rem;
+            text-align: center;
+            width: 100%;
+        }
+
+        header h1, 
+        nav ul li a {
+            font-size: 1.5rem;
+        }
+
+        nav ul {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        nav ul li {
+            display: inline;
+            margin: 0 1rem;
+        }
+
+        nav ul li a {
+            color: black;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        .container {
+            max-width: 80%;
+            margin: 1rem;
+            padding: 1rem;
+            background-color: #F5E5C2;
+            border-radius: 3px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+            flex: 1;
+        }
+
+        .products {
+            display: flex;
+            justify-content: space-around;
+            margin: 2rem 0;
+        }
+
+        .product {
+            text-align: center;
+            flex: 1;
+            margin: 0 10px;
+            padding: 1rem;
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+        }
+
+        .product img {
+            border-radius: 8px;
+            max-width: 100%;
+            cursor: pointer;
+        }
+
+        .cart {
+            width: 300px;
+            background-color: rgb(254, 229, 172);
+            padding: 1rem;
+            border-radius: 10px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+            margin-left: 20px;
+            position: sticky;
+            top: 20px;
+        }
+
+        .contact-container {
+            display: flex;
+            flex-direction: column;
+            margin-top: 2rem;
+        }
+
+        .product-details {
+            margin-top: 2rem;
+            text-align: center;
+            background-color: #ffffffb8;
+            padding: 2rem;
+            border-radius: 10px;
+            display: none;
+        }
+
+        .product-details img {
+            max-width: 250px;
+            border-radius: 10px;
+        }
+
+        .btn {
+            background-color: #ff6f61;
+            color: white;
+            border: none;
+            padding: 1rem;
+            font-size: 1rem;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .btn:hover {
+            background-color: #4300ca;
+        }
+
+        footer {
+            background-color: #333;
+            color: white;
+            text-align: center;
+            padding: 1rem 0;
+            margin-top: 2rem;
+            clear: both;
+        }
+
+        footer p {
+            font-size: 1.5rem;
+            margin: 0;
+        }
+
+        footer .social-media {
+            margin-top: 0.5rem;
+        }
+
+        footer .social-media a {
+            color: white;
+            margin: 0 1px;
+            text-decoration: none;
+            font-size: 1.2rem;
+        }
+
+        .cart-item {
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .cart-item span {
+            margin-left: 10px;
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <h1>Revelation´s</h1>
+    <nav>
+        <ul>
+            <li><a href="#">Inicio</a></li>
+            <li><a href="#">Productos</a></li>
+            <li><a href="#" onclick="toggleCart()">🛒 Carrito</a></li>
+            <li><a href="#">Contacto</a></li>
+        </ul>
+    </nav>
+</header>
+
+<div style="display: flex; width: 100%;">
+    <section class="container">
+        <h2>Productos Destacados</h2>
+        <div class="products">
+            <div class="product" onclick="showProductDetails('Lipstick Mate (Pequeño)', 'https://via.placeholder.com/300', 10, 'Descripción del Lipstick tamaño pequeño')">
+                <img src="https://via.placeholder.com/150" alt="Lipstick tamaño pequeño">
+                <h3>Lipstick Mate (Pequeño)</h3>
+                <p>Precio: $10</p>
+            </div>
+            <div class="product" onclick="showProductDetails('Lipstick Mate (Mediano)', 'https://via.placeholder.com/300', 15, 'Descripción del Lipstick tamaño mediano')">
+                <img src="https://via.placeholder.com/150" alt="Lipstick tamaño mediano">
+                <h3>Lipstick Mate (Mediano)</h3>
+                <p>Precio: $15</p>
+            </div>
+            <div class="product" onclick="showProductDetails('Lipstick Mate (Grande)', 'https://via.placeholder.com/300', 20, 'Descripción del Lipstick tamaño grande')">
+                <img src="https://via.placeholder.com/150" alt="Lipstick tamaño grande">
+                <h3>Lipstick Mate (Grande)</h3>
+                <p>Precio: $20</p>
+            </div>
+        </div>
+
+        <div class="product-details" id="productDetails">
+            <img id="productImage" src="" alt="">
+            <h3 id="productName"></h3>
+            <p id="productPrice"></p>
+            <p id="productDescription"></p>
+            <label for="quantity">Cantidad:</label>
+            <input type="number" id="quantity" value="1" min="1" style="width: 50px;">
+            <button class="btn" onclick="addToCart()">Agregar al Carrito</button>
+        </div>
+    </section>
+
+    <aside class="cart" id="cart">
+        <h2>Carrito</h2>
+        <ul id="cartItemsList">
+            <li>No hay productos en el carrito.</li>
+        </ul>
+        <h3>Total: <span id="cartTotal">$0</span></h3>
+    </aside>
+</div>
+
+<div class="contact-container">
+    <h2>Contacto</h2>
+    <form>
+        <input type="text" name="name" placeholder="Tu Nombre" required>
+        <input type="email" name="email" placeholder="Tu Correo" required>
+        <textarea name="message" rows="4" placeholder="Tu Mensaje"></textarea>
+        <button class="btn" type="submit">Enviar Mensaje</button>
+    </form>
+</div>
+
+<footer>
+    <p>&copy; 2024 Revelation´s. Todos los derechos reservados. UPN. </p>
+    <p>Yaritzza R. Mateo L. Irene . Blaj H. 5. 6.</p>
+    <div class="social-media">
+        <a href="https://www.facebook.com/" title="Facebook">&#x1F426;</a>
+        <a href="#" title="Instagram">&#x1F426;</a>
+    </div>
+</footer>
+
+<script>
+    const cartItems = []; // Array para almacenar productos en el carrito
+
+    // Función para mostrar los detalles del producto seleccionado
+    function showProductDetails(name, image, price, description) {
+        document.getElementById('productDetails').style.display = 'block';
+        document.getElementById('productName').innerText = name;
+        document.getElementById('productImage').src = image;
+        document.getElementById('productPrice').innerText = `Precio: $${price}`;
+        document.getElementById('productDescription').innerText = description;
+        document.getElementById('productDetails').dataset.price = price; // Guardar el precio en el dataset
+    }
+
+    // Simular agregar producto al carrito
+    function addToCart() {
+        const productName = document.getElementById('productName').innerText;
+        const productPrice = parseFloat(document.getElementById('productDetails').dataset.price); // Obtener el precio desde el dataset
+        const quantity = parseInt(document.getElementById('quantity').value); // Obtener la cantidad seleccionada
+        const existingItem = cartItems.find(item => item.name === productName);
+
+        if (existingItem) {
+            existingItem.quantity += quantity; // Incrementar cantidad si ya existe en el carrito
+        } else {
+            cartItems.push({ name: productName, price: productPrice, quantity }); // Agregar nuevo producto con la cantidad seleccionada
+        }
+
+        updateCart();
+        alert(`${productName} agregado al carrito!`);
+    }
+
+    // Actualizar el contenido del carrito
+    function updateCart() {
+        const cartItemsList = document.getElementById('cartItemsList');
+        cartItemsList.innerHTML = ''; // Limpiar la lista de productos
+        let total = 0; // Inicializar total
+
+        if (cartItems.length === 0) {
+            cartItemsList.innerHTML = '<li>No hay productos en el carrito.</li>';
+            document.getElementById('cartTotal').innerText = `$0`;
+        } else {
+            cartItems.forEach(item => {
+                const li = document.createElement('li');
+                li.className = 'cart-item';
+                li.innerHTML = `${item.name} (x${item.quantity}) - $${item.price.toFixed(2)} <span>Total: $${(item.price * item.quantity).toFixed(2)}</span>`;
+                cartItemsList.appendChild(li);
+                total += item.price * item.quantity; // Sumar al total
+            });
+            document.getElementById('cartTotal').innerText = `$${total.toFixed(2)}`; // Mostrar total
+        }
+    }
+
+    // Mostrar u ocultar el carrito
+    function toggleCart() {
+        const cart = document.getElementById('cart');
+        if (cart.style.display === 'none' || cart.style.display === '') {
+            cart.style.display = 'block';
+        } else {
+            cart.style.display = 'none';
+        }
+    }
+
+    // Inicialmente ocultar el carrito
+    document.getElementById('cart').style.display = 'none';
+</script>
+
+</body>
+</html>
